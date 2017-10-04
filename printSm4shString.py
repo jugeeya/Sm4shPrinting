@@ -116,7 +116,6 @@ def printChar(charToPrint, lineNum, horizOffset, facingLeft=False):
     else:
         segments = alphabet[charToPrint]
     lineOffset = 40 - (lineNum * 16)
-    savedSegments = []
     for segment in segments:
         z = getHexFloat(segment[0])
         y = getHexFloat(segment[1] + lineOffset)
@@ -128,8 +127,6 @@ def printChar(charToPrint, lineNum, horizOffset, facingLeft=False):
         hexColor = [getHexFloat(int(x)) for x in BLACK][:-1]
         segmentEffect = showSegment.format(z,y,x,zrot,size,*hexColor)
         addEffect(segmentEffect)
-        savedSegments.append(segmentEffect)
-    return savedSegments
 
 def printString(stringToPrint):
     global inCompare
@@ -153,7 +150,7 @@ def printString(stringToPrint):
                 charNum = 0
                 lineNum+=1
                 continue
-            effects = printChar(char.upper(), lineNum, horizOffset, facingLeft)
+            printChar(char.upper(), lineNum, horizOffset, facingLeft)
             charNum+=1
             if char in shortChars:
                 if facingLeft:
